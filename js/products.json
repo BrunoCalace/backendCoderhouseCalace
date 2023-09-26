@@ -1,0 +1,17 @@
+[
+  {"id":1, "nom": "bolso negro", "precio": 7500, "img":"Productos/bolso1.jpg", "cant": 1, "cat": "bolsos"},
+  {"id":2, "nom": "bolso marron", "precio": 8500, "img":"Productos/bolso2.jpg", "cant": 1, "cat": "bolsos"},
+  {"id":3, "nom": "cartera cuero", "precio": 6500, "img":"Productos/cartera1.jpg", "cant": 1, "cat": "carteras"},
+  {"id":4, "nom": "cartera colores", "precio": 10000, "img":"Productos/cartera2.jpg", "cant": 1, "cat": "carteras"},
+  {"id":5, "nom": "cartera azul", "precio": 12000, "img":"Productos/cartera3.jpg", "cant": 1, "cat": "carteras"},
+  {"id":6, "nom": "cinto marron", "precio": 2500, "img":"Productos/cinto2.jpg", "cant": 1, "cat": "cintos"},
+  {"id":7, "nom": "cinto negro", "precio": 2500, "img":"Productos/cinto3.jpg", "cant": 1, "cat": "cintos"},
+  {"id":8, "nom": "cinturon caballo", "precio": 3000, "img":"Productos/cinto4.jpg", "cant": 1, "cat": "cintos"},
+  {"id":9, "nom": "mochila mediana", "precio": 13500, "img":"Productos/mochila2.jpg", "cant": 1, "cat": "mochilas"},
+  {"id":10, "nom": "mochila purpura", "precio": 14500, "img":"Productos/mochila3.jpg", "cant": 1, "cat": "mochilas"},
+  {"id":11, "nom": "panchas beige", "precio": 16500, "img":"Productos/panchas1.jpg", "cant": 1, "cat": "calzado"},
+  {"id":12, "nom": "panchas negras", "precio": 15500, "img":"Productos/panchas2.jpg", "cant": 1, "cat": "calzado"},
+  {"id":13, "nom": "sandalias rojas", "precio": 12500, "img":"Productos/sandalia5.jpg", "cant": 1, "cat": "calzado"},
+  {"id":14, "nom": "sandalias negras", "precio": 12500, "img":"Productos/sandalias2.jpg", "cant": 1, "cat": "calzado"},
+  {"id":15, "nom": "sandalias marrones", "precio": 12500, "img":"Productos/sandalia7.jpg", "cant": 1, "cat": "calzado"}
+]
