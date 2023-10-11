@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Productos en Tiempo Real</title>
+</head>
+<body>
+    <h1>Lista de Productos en Tiempo Real</h1>
+
+    <form id="productForm">
+        <input type="text" name="title" placeholder="Título del producto">
+        <input type="text" name="description" placeholder="Descripción">
+        <input type="number" name="price" placeholder="Precio">
+        <input type="text" name="code" placeholder="Código">
+        <input type="number" name="stock" placeholder="Stock">
+        <input type="text" name="category" placeholder="Categoría">
+        <input type="text" name="thumbnails" placeholder="URL de la imagen">
+        <button type="submit">Crear Producto</button>
+    </form>
+
+    <ul id="productList">
+        {{#each products}}
+        <li>
+            <strong>{{this.title}}</strong>
+            <p>{{this.description}}</p>
+            <p>Precio: ${{this.price}}</p>
+            <p>Código: {{this.code}}</p>
+            <p>Stock: {{this.stock}}</p>
+            <p>Categoría: {{this.category}}</p>
+            <img src="{{this.thumbnails}}" alt="{{this.title}}">
+        </li>
+        {{/each}}
+    </ul>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        const productForm = document.getElementById('productForm');
+        const productList = document.getElementById('productList');
+
+        productForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(productForm);
+            const producto = {
+                title: formData.get('title'),
+                description: formData.get('description'),
+                price: parseFloat(formData.get('price')),
+                code: formData.get('code'),
+                stock: parseInt(formData.get('stock')),
+                category: formData.get('category'),
+                thumbnails: formData.get('thumbnails'),
+            };
+            socket.emit('crearProducto', producto);
+        });
+
+        socket.on('productosActualizados', ({ products }) => {
+            productList.innerHTML = '';
+            products.forEach((product) => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <strong>${product.title}</strong>
+                    <p>${product.description}</p>
+                    <p>Precio: $${product.price}</p>
+                    <p>Código: ${product.code}</p>
+                    <p>Stock: ${product.stock}</p>
+                    <p>Categoría: ${product.category}</p>
+                    <img src="${product.thumbnails}" alt="${product.title}">
+                `;
+                productList.appendChild(listItem);
+            });
+        });
+    </script>
+</body>
+</html>
