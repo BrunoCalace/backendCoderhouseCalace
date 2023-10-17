@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const productRouter = require('./src/routes/products');
 const cartRouter = require('./src/routes/carts');
+const viewRoutes = require('./src/routes/viewRoutes');
 const ProductManager = require('./src/productManager');
 
 const app = express();
@@ -13,36 +14,22 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 const hbs = exphbs.create({ 
-  layoutsDir: path.join(__dirname, 'src', 'public', 'views'),
+  layoutsDir: path.join(__dirname, 'src', 'views'),
   defaultLayout: 'home' 
 });
 
 app.engine('handlebars', hbs.engine);
-app.set('views', path.join(__dirname, 'src', 'public', 'views'));
+app.set('views', path.join(__dirname, 'src', 'views'));
 app.set('view engine', 'handlebars');
 
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname+'/public'));
 
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
+app.use('/', viewRoutes);
 
 const productManager = new ProductManager();
-
-app.get('/', async (req, res) => {
-  try {
-    const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
-    const products = await productManager.getProducts(limit);
-    res.render('home', { products });
-  } catch (error) {
-    console.error("Error en la ruta principal:", error);
-    res.status(500).json({ error: 'Error interno del servidor' });
-  }
-});
-
-app.get('/realTimeProducts', (req, res) => {
-  res.render('realTimeProducts');
-});
 
 io.on('connection', (socket) => {
   console.log('Cliente conectado al servidor de Socket.IO.');

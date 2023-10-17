@@ -1,0 +1,26 @@
+<h1>Lista de Productos en Tiempo Real</h1>
+
+<form id="productForm">
+    <input type="text" name="title" placeholder="Título del producto">
+    <input type="text" name="description" placeholder="Descripción">
+    <input type="number" name="price" placeholder="Precio">
+    <input type="text" name="code" placeholder="Código">
+    <input type="number" name="stock" placeholder="Stock">
+    <input type="text" name="category" placeholder="Categoría">
+    <input type="text" name="thumbnails" placeholder="URL de la imagen">
+    <button type="submit">Crear Producto</button>
+</form>
+
+<ul id="productList">
+    {{#each products}}
+    <li>
+        <strong>{{this.title}}</strong>
+        <p>{{this.description}}</p>
+        <p>Precio: ${{this.price}}</p>
+        <p>Código: {{this.code}}</p>
+        <p>Stock: {{this.stock}}</p>
+        <p>Categoría: {{this.category}}</p>
+        <img src="{{this.thumbnails}}" alt="{{this.title}}">
+    </li>
+    {{/each}}
+</ul>
