@@ -1,26 +1,25 @@
 <h1>Lista de Productos en Tiempo Real</h1>
-
 <form id="productForm">
-    <input type="text" name="title" placeholder="Título del producto">
-    <input type="text" name="description" placeholder="Descripción">
-    <input type="number" name="price" placeholder="Precio">
-    <input type="text" name="code" placeholder="Código">
-    <input type="number" name="stock" placeholder="Stock">
-    <input type="text" name="category" placeholder="Categoría">
-    <input type="text" name="thumbnails" placeholder="URL de la imagen">
-    <button type="submit">Crear Producto</button>
+  <input type="text" name="title" id="title" placeholder="Título del producto" />
+  <input type="text" name="description" id="description" placeholder="Descripción" />
+  <input type="number" name="price" id="price" placeholder="Precio" />
+  <input type="text" name="code" id="code" placeholder="Código" />
+  <input type="number" name="stock" id="stock" placeholder="Stock" />
+  <input type="text" name="category" id="category" placeholder="Categoría" />
+  <input type="text" name="thumbnails" id="thumbnails" placeholder="URL de la imagen" />
+  <button type="submit">Crear Producto</button>
 </form>
-
 <ul id="productList">
-    {{#each products}}
+  {{#each products}}
     <li>
-        <strong>{{this.title}}</strong>
-        <p>{{this.description}}</p>
-        <p>Precio: ${{this.price}}</p>
-        <p>Código: {{this.code}}</p>
-        <p>Stock: {{this.stock}}</p>
-        <p>Categoría: {{this.category}}</p>
-        <img src="{{this.thumbnails}}" alt="{{this.title}}">
+      <strong>{{this.title}}</strong>
+      <p>Precio: ${{this.price}}</p>
+      <p>Categoría: {{this.category}}</p>
+      <img src="{{this.thumbnails}}" alt="{{this.title}}" height="50" />
+      <p>Stock: {{this.stock}}</p>
+      <p>{{this.description}}</p>
     </li>
-    {{/each}}
+  {{/each}}
 </ul>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>

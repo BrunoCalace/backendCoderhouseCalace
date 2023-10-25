@@ -1,6 +1,36 @@
 <h1>Lista de Productos</h1>
 <ul>
-    {{#each products}}
+  {{#each products}}
+      <div>
         <li>{{this.title}} - {{this.price}}</li>
-    {{/each}}
+        <img src="{{this.thumbnails}}" alt="{{this.title}}" height="50" />
+        <button class="btn btn-danger delete-product" data-id="{{this.id}}">Borrar</button>
+      </div>
+  {{/each}}
 </ul>
+
+<script>
+  const deleteButtons = document.querySelectorAll('.delete-product');
+  deleteButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      const productId = event.target.getAttribute('data-id');
+
+      const confirmed = window.confirm('¿Estás seguro de que deseas eliminar este producto?');
+      if (confirmed) {
+        fetch(`/api/products/${productId}`, { method: 'DELETE' })
+          .then((response) => {
+            if (response.status === 200) {
+              alert('Producto eliminado con éxito');
+              location.reload();
+            } else {
+              alert('No se pudo eliminar el producto');
+            }
+          })
+          .catch((error) => {
+            console.error('Error en la solicitud de eliminación:', error);
+            alert('Error en la solicitud de eliminación');
+          });
+      }
+    });
+  });
+</script>

@@ -1,30 +1,28 @@
-const express = require('express');
-const router = express.Router();
-const ProductManager = require('../productManager');
+import express from "express";
+import productManager from "../classes/productManager.js";
 
-const productManager = new ProductManager();
+const viewsRoutes = express.Router();
 
-router.get('/', async (req, res) => {
-    try {
-        const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
-        const products = await productManager.getProducts(limit);
-        res.render('home', { products });
-      } catch (error) {
-        console.error("Error en la ruta principal:", error);
-        res.status(500).send('Error interno del servidor: ' + error.message);
-      }
-});
-
-router.get('/realTimeProducts', async (req, res) => {
+viewsRoutes.get("/", async (req, res) => {
   try {
     const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
     const products = await productManager.getProducts(limit);
-    res.render('realTimeProducts', {products});
+    res.render("home", { products });
   } catch (error) {
-    console.error("Error en la realTimeProducts:", error);
-    res.status(500).send('Error interno del servidor: ' + error.message);
+    console.error("Error en la ruta principal:", error);
+    res.status(500).send("Error interno del servidor: " + error.message);
   }
-  
 });
 
-module.exports = router;
+viewsRoutes.get("/realTimeProducts", async (req, res) => {
+  try {
+    const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
+    const products = await productManager.getProducts(limit);
+    res.render("realTimeProducts", { products });
+  } catch (error) {
+    console.error("Error en la realTimeProducts:", error);
+    res.status(500).send("Error interno del servidor: " + error.message);
+  }
+});
+
+export default viewsRoutes;
